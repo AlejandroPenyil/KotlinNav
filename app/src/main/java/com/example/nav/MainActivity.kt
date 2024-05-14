@@ -14,6 +14,7 @@ class MainActivity : AppCompatActivity() {
         val firstFragment=FirstFragment()
         val secondFragment=SecondFragment()
         val thirdFragment=ThirdFragment()
+        val fourthFragment=FourthFragment()
 
         setCurrentFragment(firstFragment)
 
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.home->setCurrentFragment(firstFragment)
                 R.id.person->setCurrentFragment(secondFragment)
                 R.id.settings->setCurrentFragment(thirdFragment)
+                R.id.P->setCurrentFragment(fourthFragment)
 
             }
             true
