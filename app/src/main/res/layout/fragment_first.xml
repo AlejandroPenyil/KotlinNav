@@ -33,7 +33,6 @@
 
         android:backgroundTint="@android:color/holo_green_light"
 
-
         android:text="llamar_api"
         android:textColor="@android:color/background_light"
         app:layout_constraintEnd_toEndOf="parent"
@@ -42,6 +41,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvPokemon"
+        android:backgroundTint="@color/background"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="15dp"

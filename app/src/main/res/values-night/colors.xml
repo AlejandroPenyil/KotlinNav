@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="background">#000000</color>
     <!--    Setting-->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="purple_500">#304C0F</color>
+    <color name="purple_700">#4CAF50</color>
+    <color name="teal_200">#CDDC39</color>
+    <color name="teal_700">#FF018786</color>
+
+
     <color name="settings_text_title">#FFFFFF</color>
 </resources>
