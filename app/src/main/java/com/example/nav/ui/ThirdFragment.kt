@@ -1,12 +1,16 @@
 package com.example.nav.ui
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.edit
 import androidx.datastore.core.DataStore
+import androidx.datastore.dataStoreFile
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
@@ -14,14 +18,17 @@ import androidx.datastore.preferences.preferencesDataStore
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.nav.databinding.FragmentThirdBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-
-val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
 class ThirdFragment : Fragment() {
     private var _binding: FragmentThirdBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,13 +41,17 @@ class ThirdFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        observeDarkMode()
+
+        sharedPreferences = requireActivity().getSharedPreferences("settings", Context.MODE_PRIVATE)
+
         initUI()
+        observeDarkMode()
     }
 
     private fun initUI() {
         binding.switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
             applyDarkMode(isChecked)
+            setDarkModePreference(isChecked)
         }
     }
 
@@ -51,31 +62,38 @@ class ThirdFragment : Fragment() {
             AppCompatDelegate.MODE_NIGHT_NO
         }
         AppCompatDelegate.setDefaultNightMode(currentMode)
-
-        // Guardar el estado del modo oscuro
-        lifecycleScope.launch {
-            requireContext().dataStore.edit { preferences ->
-                preferences[IS_DARK_MODE_KEY] = isDarkMode
-            }
-        }
+        requireActivity().recreate()
     }
 
     private fun observeDarkMode() {
-        lifecycleScope.launchWhenStarted {
-            requireContext().dataStore.data.collect { preferences ->
-                val isDarkMode = preferences[IS_DARK_MODE_KEY] ?: false
-                binding.switchDarkMode.isChecked = isDarkMode
-                applyDarkMode(isDarkMode)
-            }
-        }
+        val isDarkMode = sharedPreferences.getBoolean("dark_mode", false)
+        binding.switchDarkMode.isChecked = isDarkMode
+        applyDarkMode(isDarkMode)
+
+        // Observa los cambios en el modo oscuro
+        sharedPreferences.registerOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        // Desregistrarse del cambio de preferencias al destruir la vista
+        sharedPreferences.unregisterOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener)
     }
 
-    companion object {
-        private val IS_DARK_MODE_KEY = booleanPreferencesKey(("is_dark_mode"))
+    private fun setDarkModePreference(isDarkMode: Boolean) {
+        // Utilizar coroutines para guardar las preferencias en un hilo de fondo
+        GlobalScope.launch(Dispatchers.IO) {
+            sharedPreferences.edit().putBoolean("dark_mode", isDarkMode).apply()
+        }
     }
+
+    private val onSharedPreferenceChangeListener =
+        SharedPreferences.OnSharedPreferenceChangeListener { sharedPreferences, key ->
+            if (key == "dark_mode") {
+                val isDarkMode = sharedPreferences.getBoolean("dark_mode", false)
+                binding.switchDarkMode.isChecked = isDarkMode
+                applyDarkMode(isDarkMode)
+            }
+        }
 }
