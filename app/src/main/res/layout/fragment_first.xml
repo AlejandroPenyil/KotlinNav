@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/background">
 
     <EditText
         android:id="@+id/editTextText"
@@ -15,13 +16,10 @@
         android:autofillHints=""
         android:ems="10"
         android:hint="pokemon_name"
-
         android:inputType="text"
-
         android:minHeight="48dp"
         android:textColorHint="#8D6E63"
         app:layout_constraintEnd_toStartOf="@id/Call"
-
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,9 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-
         android:backgroundTint="@android:color/holo_green_light"
-
         android:text="llamar_api"
         android:textColor="@android:color/background_light"
         app:layout_constraintEnd_toEndOf="parent"

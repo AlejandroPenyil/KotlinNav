@@ -26,7 +26,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class FirstFragment:Fragment(R.layout.fragment_first) {
+class FirstFragment:Fragment() {
     private lateinit var retrofit: RetrofitClient
 
     private var _binding: FragmentFirstBinding? = null
