@@ -18,7 +18,7 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
     private val dataStore = application.dataStore
 
     companion object {
-        val DARK_MODE_PREF_KEY = booleanPreferencesKey("dark_mode")
+        val DARK_MODE_PREF_KEY = booleanPreferencesKey("is_dark_mode")
     }
 
     val isDarkMode: Flow<Boolean> = dataStore.data
