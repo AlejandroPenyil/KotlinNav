@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
-private val Context.dataStore by preferencesDataStore(name = "settings")
+val Context.dataStore by preferencesDataStore(name = "settings")
 @HiltAndroidApp
 class NavApp:Application(){
 

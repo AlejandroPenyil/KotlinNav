@@ -16,19 +16,22 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.nav.databinding.FragmentThirdBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-
+@AndroidEntryPoint
 class ThirdFragment : Fragment() {
     private var _binding: FragmentThirdBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var viewModel: SettingsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,7 +45,7 @@ class ThirdFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        sharedPreferences = requireActivity().getSharedPreferences("settings", Context.MODE_PRIVATE)
+        viewModel = ViewModelProvider(this).get(SettingsViewModel::class.java)
 
         initUI()
         observeDarkMode()
@@ -50,8 +53,16 @@ class ThirdFragment : Fragment() {
 
     private fun initUI() {
         binding.switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
-            applyDarkMode(isChecked)
-            setDarkModePreference(isChecked)
+            viewModel.setDarkMode(isChecked)
+        }
+    }
+
+    private fun observeDarkMode() {
+        lifecycleScope.launchWhenStarted {
+            viewModel.isDarkMode.collect { isDarkMode ->
+                binding.switchDarkMode.isChecked = isDarkMode
+                applyDarkMode(isDarkMode)
+            }
         }
     }
 
@@ -65,35 +76,8 @@ class ThirdFragment : Fragment() {
         requireActivity().recreate()
     }
 
-    private fun observeDarkMode() {
-        val isDarkMode = sharedPreferences.getBoolean("dark_mode", false)
-        binding.switchDarkMode.isChecked = isDarkMode
-        applyDarkMode(isDarkMode)
-
-        // Observa los cambios en el modo oscuro
-        sharedPreferences.registerOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener)
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-        // Desregistrarse del cambio de preferencias al destruir la vista
-        sharedPreferences.unregisterOnSharedPreferenceChangeListener(onSharedPreferenceChangeListener)
     }
-
-    private fun setDarkModePreference(isDarkMode: Boolean) {
-        // Utilizar coroutines para guardar las preferencias en un hilo de fondo
-        GlobalScope.launch(Dispatchers.IO) {
-            sharedPreferences.edit().putBoolean("dark_mode", isDarkMode).apply()
-        }
-    }
-
-    private val onSharedPreferenceChangeListener =
-        SharedPreferences.OnSharedPreferenceChangeListener { sharedPreferences, key ->
-            if (key == "dark_mode") {
-                val isDarkMode = sharedPreferences.getBoolean("dark_mode", false)
-                binding.switchDarkMode.isChecked = isDarkMode
-                applyDarkMode(isDarkMode)
-            }
-        }
 }
