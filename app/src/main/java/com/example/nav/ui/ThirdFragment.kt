@@ -3,6 +3,7 @@ package com.example.nav.ui
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,7 +39,7 @@ class ThirdFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentThirdBinding.inflate(inflater, container, false)
+        _binding = FragmentThirdBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -60,6 +61,7 @@ class ThirdFragment : Fragment() {
     private fun observeDarkMode() {
         lifecycleScope.launchWhenStarted {
             viewModel.isDarkMode.collect { isDarkMode ->
+                Log.d("DarkMode", "Is Dark Mode: $isDarkMode")
                 binding.switchDarkMode.isChecked = isDarkMode
                 applyDarkMode(isDarkMode)
             }
@@ -73,7 +75,7 @@ class ThirdFragment : Fragment() {
             AppCompatDelegate.MODE_NIGHT_NO
         }
         AppCompatDelegate.setDefaultNightMode(currentMode)
-        requireActivity().recreate()
+//        requireActivity().recreate()
     }
 
     override fun onDestroyView() {
