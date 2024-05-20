@@ -1,5 +1,6 @@
 package com.example.nav.ui.Main
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.nav.databinding.FragmentThirdBinding
 import com.example.nav.ui.SettingsViewModel
+import com.example.nav.ui.Start.Start
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -42,6 +44,12 @@ class ThirdFragment : Fragment() {
         binding.switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
             viewModel.setDarkMode(isChecked)
         }
+        binding.backStart.setOnClickListener { goStart() }
+    }
+
+    private fun goStart() {
+        val intent = Intent(this.activity, Start::class.java)
+        startActivity(intent)
     }
 
     private fun observeDarkMode() {
