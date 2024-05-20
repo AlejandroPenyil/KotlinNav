@@ -19,6 +19,12 @@ class SignUp: AppCompatActivity() {
 
     private fun initUi() {
         binding.signUp.setOnClickListener { goToMain() }
+        binding.btBack.setOnClickListener { goBack() }
+    }
+
+    private fun goBack() {
+        val intent = Intent(this, Start::class.java)
+        startActivity(intent)
     }
 
     private fun goToMain(){

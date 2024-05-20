@@ -18,6 +18,12 @@ class Login : AppCompatActivity() {
 
     private fun initUi() {
         binding.button.setOnClickListener { goToMain() }
+        binding.button2.setOnClickListener { goBack() }
+    }
+
+    private fun goBack() {
+        val intent = Intent(this, Start::class.java)
+        startActivity(intent)
     }
 
     private fun goToMain(){
