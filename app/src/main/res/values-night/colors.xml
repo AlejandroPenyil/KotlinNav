@@ -9,6 +9,7 @@
     <color name="teal_200">#CDDC39</color>
     <color name="teal_700">#FF018786</color>
 
+    <color name="backgroundRv">#101010</color>
 
     <color name="settings_text_title">#FFFFFF</color>
 </resources>

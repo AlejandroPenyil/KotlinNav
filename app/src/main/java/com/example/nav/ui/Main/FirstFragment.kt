@@ -1,4 +1,4 @@
-package com.example.nav.ui
+package com.example.nav.ui.Main
 
 import android.content.Context
 import android.icu.lang.UCharacter
@@ -14,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.nav.R
-import com.example.nav.databinding.ActivityMainBinding
 import com.example.nav.databinding.FragmentFirstBinding
 import com.example.prueba.APIService
 import com.example.prueba.RetrofitClient

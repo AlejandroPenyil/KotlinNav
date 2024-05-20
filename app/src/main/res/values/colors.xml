@@ -10,4 +10,5 @@
     <color name="teal_700">#FF018786</color>
 
     <color name="settings_text_title">#000000</color>
+    <color name="backgroundRv">#FFFFFFFF</color>
 </resources>

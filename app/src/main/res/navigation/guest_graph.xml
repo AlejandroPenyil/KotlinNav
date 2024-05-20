@@ -3,24 +3,19 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_graph"
-    app:startDestination="@id/home">
+    android:id="@+id/guest_graph"
+    app:startDestination="@id/Guest">
 
     <fragment
-        android:id="@+id/Long"
-        android:name="com.example.nav.ui.Main.FourthFragment"
-        android:label="FourthFragment"
-        tools:layout="@layout/fragment_fourth"/>
+        android:id="@+id/Guest"
+        android:name="com.example.nav.ui.guest.GuestHomeFragment"
+        android:label="GuestHomeFragment"
+        tools:layout="@layout/fragment_guest_home"/>
     <fragment
         android:id="@+id/person"
         android:name="com.example.nav.ui.Main.SecondFragment"
         android:label="SecondFragment"
         tools:layout="@layout/fragment_second"/>
-    <fragment
-        android:id="@+id/home"
-        android:name="com.example.nav.ui.Main.FirstFragment"
-        android:label="FirstFragment"
-        tools:layout="@layout/fragment_first"/>
     <fragment
         android:id="@+id/settings"
         android:name="com.example.nav.ui.Main.ThirdFragment"
