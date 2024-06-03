@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.jackson.JacksonConverterFactory
 
 object RetrofitClient {
-    private const val BASE_URL = " https://pokeapi.co/"
+    private const val BASE_URL = " http://51.124.190.104:8080/"
 
     val okHttpClient = OkHttpClient()
         .newBuilder()
