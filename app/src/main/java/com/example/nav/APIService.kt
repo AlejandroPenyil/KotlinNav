@@ -23,7 +23,7 @@ interface APIService {
     fun login(@Body requestBody: LoginRequest): Call<UsuarioDTO>
 
     @POST("/usuarios")
-    fun register(@Body usuarioDTO: UsuarioDTO?): Response<UsuarioDTO>
+    fun register(@Body usuarioDTO: UsuarioDTO?): Call<UsuarioDTO>
 
 
 }
