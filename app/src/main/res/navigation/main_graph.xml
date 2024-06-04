@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_person_to_solicitudPresupuestoFragment"
             app:destination="@id/solicitudPresupuestoFragment" />
+        <action
+            android:id="@+id/action_person_to_viewPresupuestosFragment"
+            app:destination="@id/viewPresupuestosFragment" />
     </fragment>
     <fragment
         android:id="@+id/home"
@@ -34,5 +37,18 @@
         android:id="@+id/solicitudPresupuestoFragment"
         android:name="com.example.nav.ui.Main.Presupuesto.SolicitudPresupuestoFragment"
         android:label="fragment_solicitud_presupuesto"
-        tools:layout="@layout/fragment_solicitud_presupuesto" />
+        tools:layout="@layout/fragment_solicitud_presupuesto" >
+        <action
+            android:id="@+id/action_solicitudPresupuestoFragment_to_person"
+            app:destination="@id/person" />
+    </fragment>
+    <fragment
+        android:id="@+id/viewPresupuestosFragment"
+        android:name="com.example.nav.ui.Main.Presupuesto.ViewPresupuestosFragment"
+        android:label="fragment_view_presupuestos"
+        tools:layout="@layout/fragment_view_presupuestos">
+        <action
+            android:id="@+id/action_viewPresupuestosFragment_to_person"
+            app:destination="@id/person" />
+    </fragment>
 </navigation>

@@ -7,17 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import com.example.nav.R
-import com.example.nav.databinding.FragmentSecondBinding
 import com.example.nav.databinding.FragmentSolicitudPresupuestoBinding
+import com.example.nav.databinding.FragmentViewPresupuestosBinding
 
-class SolicitudPresupuestoFragment : Fragment() {
-    private var _binding: FragmentSolicitudPresupuestoBinding? = null
+
+class ViewPresupuestosFragment : Fragment() {
+    private var _binding: FragmentViewPresupuestosBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentSolicitudPresupuestoBinding.inflate(inflater, container, false)
+        _binding = FragmentViewPresupuestosBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -28,6 +29,6 @@ class SolicitudPresupuestoFragment : Fragment() {
     }
 
     private fun initUi() {
-        binding.backBtn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_solicitudPresupuestoFragment_to_person,null))
+        binding.BackBtn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_viewPresupuestosFragment_to_person,null))
     }
 }

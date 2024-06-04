@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import com.example.nav.R
 import com.example.nav.databinding.FragmentFirstBinding
 import com.example.nav.databinding.FragmentSecondBinding
@@ -31,9 +32,11 @@ class SecondFragment:Fragment(R.layout.fragment_second) {
     }
 
     private fun initUi() {
-        binding.SolPreBTN.setOnClickListener{ goToSolicitud() }
+        binding.SolPreBTN.setOnClickListener(Navigation.createNavigateOnClickListener(R.id
+            .action_person_to_solicitudPresupuestoFragment,null))
+        binding.ViewPresBTN.setOnClickListener(Navigation.createNavigateOnClickListener(R.id
+            .action_person_to_viewPresupuestosFragment))
     }
 
-    private fun goToSolicitud() {
-    }
+//    https://umhandroid.momrach.es/android-navigation-java/
 }
