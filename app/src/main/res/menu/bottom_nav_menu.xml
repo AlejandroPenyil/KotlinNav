@@ -6,12 +6,12 @@
         android:icon="@drawable/ic_home"/>
     <item
         android:id="@+id/person"
-        android:title="Solicitar presupuestos"
+        android:title="Presupuestos"
         android:icon="@drawable/ic_presu"/>
-    <item
-        android:id="@+id/P"
-        android:title="Zona de pagos"
-        android:icon="@drawable/baseline_attach_money_24"/>
+<!--    <item-->
+<!--        android:id="@+id/P"-->
+<!--        android:title="Zona de pagos"-->
+<!--        android:icon="@drawable/baseline_attach_money_24"/>-->
     <item
         android:id="@+id/Long"
         android:title="Facturas"

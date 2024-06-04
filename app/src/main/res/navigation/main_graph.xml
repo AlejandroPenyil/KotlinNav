@@ -15,7 +15,11 @@
         android:id="@+id/person"
         android:name="com.example.nav.ui.Main.SecondFragment"
         android:label="SecondFragment"
-        tools:layout="@layout/fragment_second"/>
+        tools:layout="@layout/fragment_second">
+        <action
+            android:id="@+id/action_person_to_solicitudPresupuestoFragment"
+            app:destination="@id/solicitudPresupuestoFragment" />
+    </fragment>
     <fragment
         android:id="@+id/home"
         android:name="com.example.nav.ui.Main.FirstFragment"
@@ -26,4 +30,9 @@
         android:name="com.example.nav.ui.Main.ThirdFragment"
         android:label="fragment_third"
         tools:layout="@layout/fragment_third" />
+    <fragment
+        android:id="@+id/solicitudPresupuestoFragment"
+        android:name="com.example.nav.ui.Main.Presupuesto.SolicitudPresupuestoFragment"
+        android:label="fragment_solicitud_presupuesto"
+        tools:layout="@layout/fragment_solicitud_presupuesto" />
 </navigation>
