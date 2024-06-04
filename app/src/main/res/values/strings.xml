@@ -7,4 +7,7 @@
     <string name="configDarkMode">Activa el modo oscuro para un cambio visual</string>
     <string name="iniciar_sesion">Iniciar sesion</string>
     <string name="volver">Volver</string>
+
+    <!-- String del apartado Sobre   -->
+    <string name="introducción">Sobre</string>
 </resources>

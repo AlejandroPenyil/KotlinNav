@@ -15,9 +15,15 @@ interface APIService {
     @POST("/imagenes/cliente")
     suspend fun getFiles(@Body usuarioDTO: UsuarioDTO?): Response<List<ImageneDTO>>
 
+    @GET("/imagenes/invitado")
+    suspend fun getImagesGuest(): Response<List<ImageneDTO>>
+
     // Define la interfaz para las solicitudes HTTP
     @POST("/usuarios/login")
     fun login(@Body requestBody: LoginRequest): Call<UsuarioDTO>
+
+    @POST("/usuarios")
+    fun register(@Body usuarioDTO: UsuarioDTO?): Response<UsuarioDTO>
 
 
 }

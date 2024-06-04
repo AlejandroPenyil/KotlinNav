@@ -28,6 +28,8 @@ class SignUp: AppCompatActivity() {
     }
 
     private fun goToMain(){
+
+
         val intent = Intent(this, Login::class.java)
         startActivity(intent)
     }

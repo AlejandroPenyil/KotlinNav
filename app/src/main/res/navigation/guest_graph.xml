@@ -13,9 +13,8 @@
         tools:layout="@layout/fragment_guest_home"/>
     <fragment
         android:id="@+id/person"
-        android:name="com.example.nav.ui.Main.SecondFragment"
-        android:label="SecondFragment"
-        tools:layout="@layout/fragment_second"/>
+        android:name="com.example.nav.ui.guest.AboutFragment"
+        tools:layout="@layout/fragment_about" />
     <fragment
         android:id="@+id/settings"
         android:name="com.example.nav.ui.Main.ThirdFragment"
