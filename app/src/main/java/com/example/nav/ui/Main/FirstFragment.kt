@@ -1,24 +1,17 @@
 package com.example.nav.ui.Main
 
-import android.content.Context
-import android.icu.lang.UCharacter
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
-import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.nav.R
 import com.example.nav.databinding.FragmentFirstBinding
 import com.example.nav.ui.Start.UserDataHolder.usuarioDTO
+import com.example.nav.ui.UserAdapter
 import com.example.prueba.APIService
 import com.example.prueba.RetrofitClient
-import com.example.prueba.UserAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -59,7 +52,7 @@ class FirstFragment : Fragment() {
                 val images = response.body()?.map { it.ubicacion } ?: emptyList()
 
                 requireActivity().runOnUiThread {
-                    adapter = ImageAdapter(images)
+                    adapter = UserAdapter(images)
                     binding.rvPokemon.adapter = adapter
                 }
             } else {

@@ -8,7 +8,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 
-class UserAdapter(private val imageUrls: List<String>) : RecyclerView.Adapter<UserAdapter.ImageViewHolder>() {
+class UserAdapter(private val imageUrls: List<String?>) : RecyclerView.Adapter<UserAdapter.ImageViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_image, parent, false)
