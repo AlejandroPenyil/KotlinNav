@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/presupuestoLogo"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:contentDescription="@string/presupuesto_logo"
+        android:src="@drawable/ic_document_logo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/presupuestoStatus"/>
+
+    <TextView
+        android:id="@+id/presupuestoStatus"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Status"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/presupuestoDate"
+        app:layout_constraintStart_toEndOf="@id/presupuestoLogo"
+        app:layout_constraintEnd_toStartOf="@id/downloadButton"/>
+
+    <TextView
+        android:id="@+id/presupuestoDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Date"
+        app:layout_constraintTop_toBottomOf="@id/presupuestoStatus"
+        app:layout_constraintStart_toStartOf="@id/presupuestoStatus"
+        app:layout_constraintEnd_toEndOf="@id/presupuestoStatus"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ImageButton
+        android:id="@+id/downloadButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:contentDescription="@string/download"
+        android:src="@drawable/ic_download"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/presupuestoStatus"/>
+
+    <ImageButton
+        android:id="@+id/btnAccept"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:contentDescription="@string/accept"
+        android:src="@drawable/ic_accept"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/downloadButton"/>
+
+    <ImageButton
+        android:id="@+id/btnReject"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:contentDescription="@string/reject"
+        android:src="@drawable/ic_reject"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnAccept"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

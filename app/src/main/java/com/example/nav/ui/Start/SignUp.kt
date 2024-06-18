@@ -43,9 +43,10 @@ class SignUp : AppCompatActivity() {
         val confContraseña = binding.editTextTextPasswordConfirmation.text.toString()
         val dni = binding.editTextDni.text.toString()
         val direccion = binding.editTextDireccion.text.toString()
+        val apellidos = binding.editTextApellidos.text.toString()
 
         if (nombre.isEmpty() || contraseña.isEmpty() || correo.isEmpty() || telefono.isEmpty()
-            || userName.isEmpty() || confContraseña.isEmpty() || direccion.isEmpty() || dni.isEmpty()) {
+            || userName.isEmpty() || confContraseña.isEmpty() || direccion.isEmpty() || dni.isEmpty() || apellidos.isEmpty()) {
             Toast.makeText(this@SignUp, "Por favor, rellena todos los campos", Toast.LENGTH_SHORT)
                 .show()
             return
@@ -65,7 +66,8 @@ class SignUp : AppCompatActivity() {
             "CLIENT",
             telefono,
             direccion,
-            userName
+            userName,
+            apellidos
         )
 
         val retrofit = RetrofitClient.getClient()

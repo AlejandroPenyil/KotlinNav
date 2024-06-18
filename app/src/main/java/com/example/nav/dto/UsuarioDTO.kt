@@ -9,5 +9,6 @@ data class UsuarioDTO(
     val rol: String,
     val telefono: String,
     val direccion: String,
-    val userName: String
+    val userName: String,
+    val apellidos: String
 )

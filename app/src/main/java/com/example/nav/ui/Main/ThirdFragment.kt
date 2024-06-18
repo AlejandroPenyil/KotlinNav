@@ -27,7 +27,7 @@ class ThirdFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentThirdBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentThirdBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -48,12 +48,12 @@ class ThirdFragment : Fragment() {
     }
 
     private fun goStart() {
-        val intent = Intent(this.activity, Start::class.java)
+        val intent = Intent(requireActivity(), Start::class.java)
         startActivity(intent)
     }
 
     private fun observeDarkMode() {
-        lifecycleScope.launchWhenStarted {
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.isDarkMode.collect { isDarkMode ->
                 Log.d("DarkMode", "Is Dark Mode: $isDarkMode")
                 binding.switchDarkMode.isChecked = isDarkMode
@@ -69,7 +69,6 @@ class ThirdFragment : Fragment() {
             AppCompatDelegate.MODE_NIGHT_NO
         }
         AppCompatDelegate.setDefaultNightMode(currentMode)
-//        requireActivity().recreate()
     }
 
     override fun onDestroyView() {

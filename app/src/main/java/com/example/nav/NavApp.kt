@@ -7,18 +7,19 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.viewModelScope
-import com.example.nav.ui.SettingsViewModel.Companion.DARK_MODE_PREF_KEY
 import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 
 
 val Context.dataStore by preferencesDataStore(name = "settings")
+
 @HiltAndroidApp
-class NavApp:Application(){
+class NavApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
@@ -40,9 +41,8 @@ class NavApp:Application(){
                 AppCompatDelegate.MODE_NIGHT_NO
             }
 
-
             // Establece el modo de noche según las preferencias cargadas
-            runBlocking {
+            withContext(Dispatchers.Main) {
                 AppCompatDelegate.setDefaultNightMode(currentMode)
             }
         }

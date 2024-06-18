@@ -10,4 +10,9 @@
 
     <!-- String del apartado Sobre   -->
     <string name="introducción">Sobre</string>
+    <string name="document_logo" />
+    <string name="download" />
+    <string name="accept" />
+    <string name="reject" />
+    <string name="presupuesto_logo" />
 </resources>

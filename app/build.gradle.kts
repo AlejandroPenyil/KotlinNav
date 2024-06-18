@@ -63,6 +63,7 @@ dependencies {
     implementation ("com.squareup.picasso:picasso:2.71828")
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.6")
+    implementation ("androidx.constraintlayout:constraintlayout:2.1.0")
 
     val navVersion = "2.7.1"
 
@@ -75,3 +76,4 @@ dependencies {
     kapt("com.google.dagger:hilt-compiler:2.48")
 
 }
+apply(plugin = "dagger.hilt.android.plugin")

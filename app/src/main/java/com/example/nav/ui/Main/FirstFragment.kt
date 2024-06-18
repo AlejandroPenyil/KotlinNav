@@ -1,6 +1,7 @@
 package com.example.nav.ui.Main
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,18 +47,27 @@ class FirstFragment : Fragment() {
 
     private fun getData() {
         CoroutineScope(Dispatchers.IO).launch {
-            val response = RetrofitClient.getClient().create(APIService::class.java).getFiles(usuarioDTO)
+            try {
+                val response = RetrofitClient.getClient().create(APIService::class.java).getFiles(usuarioDTO)
 
-            if (response.isSuccessful) {
-                val images = response.body()?.map { it.ubicacion } ?: emptyList()
+                if (response.isSuccessful) {
+                    val images = response.body()?.map { it.ubicacion } ?: emptyList()
+                    Log.d("FirstFragment", "Images loaded: ${images.size}")
 
-                requireActivity().runOnUiThread {
-                    adapter = UserAdapter(images)
-                    binding.rvPokemon.adapter = adapter
+                    requireActivity().runOnUiThread {
+                        adapter = UserAdapter(images)
+                        binding.rvPokemon.adapter = adapter
+                    }
+                } else {
+                    Log.e("FirstFragment", "Failed to load images: ${response.errorBody()?.string()}")
+                    requireActivity().runOnUiThread {
+                        Toast.makeText(activity, "Failed to load images", Toast.LENGTH_SHORT).show()
+                    }
                 }
-            } else {
+            } catch (e: Exception) {
+                Log.e("FirstFragment", "Exception loading images", e)
                 requireActivity().runOnUiThread {
-                    Toast.makeText(activity, "Failed to load images", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, "Error loading images", Toast.LENGTH_SHORT).show()
                 }
             }
         }
