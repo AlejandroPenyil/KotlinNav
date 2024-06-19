@@ -2,6 +2,7 @@ package com.example.prueba
 
 import com.example.nav.data.LoginRequest
 import com.example.nav.data.NameRequest
+import com.example.nav.dto.FacturaDTO
 import com.example.nav.dto.ImageneDTO
 import com.example.nav.dto.PresupuestoDTO
 import com.example.nav.dto.SolicitudDTO
@@ -38,4 +39,11 @@ interface APIService {
     @GET("presupuestos/douwnload/{id}")
     @Streaming
     suspend fun downloadFile(@Path("id") id: Long): Response<ResponseBody>
+
+    @POST("facturas/client")
+    suspend fun facturaFindByUsuario(@Body usuarioDTO: UsuarioDTO?): Response<List<FacturaDTO>>
+
+    @GET("facturas/douwnload/{id}")
+    @Streaming
+    suspend fun downloadFactura(@Path("id") id: Long): Response<ResponseBody>
 }

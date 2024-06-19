@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/Long"
-        android:name="com.example.nav.ui.Main.FourthFragment"
+        android:name="com.example.nav.ui.Main.Facturas.FourthFragment"
         android:label="FourthFragment"
         tools:layout="@layout/fragment_fourth"/>
     <fragment

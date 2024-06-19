@@ -1,4 +1,4 @@
-package com.example.nav.ui.Main.Presupuesto
+package com.example.nav.ui.Main.Facturas
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -22,29 +22,25 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.nav.R
-import com.example.nav.databinding.FragmentViewPresupuestosBinding
+import com.example.nav.databinding.FragmentFourthBinding
 import com.example.nav.ui.Start.UserDataHolder.usuarioDTO
 import com.example.prueba.APIService
 import com.example.prueba.RetrofitClient
-import com.squareup.picasso.BuildConfig
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.File
 
-
-
-@AndroidEntryPoint
-class ViewPresupuestosFragment : Fragment() {
-    private var _binding: FragmentViewPresupuestosBinding? = null
+class FourthFragment:Fragment(R.layout.fragment_fourth) {
+    private var _binding: FragmentFourthBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var adapter: PresupuestoAdapter
+    private lateinit var adapter: FacturaAdapter
 
     companion object {
         private const val NOTIFICATION_PERMISSION_REQUEST_CODE = 1001
     }
+
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
@@ -59,17 +55,17 @@ class ViewPresupuestosFragment : Fragment() {
             }
         }
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentViewPresupuestosBinding.inflate(inflater, container, false)
+        _binding = FragmentFourthBinding.inflate(inflater, container, false)
         createNotificationChannel()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         if (ContextCompat.checkSelfPermission(requireContext(), android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
             // Check if the user has previously denied the permission
@@ -89,39 +85,39 @@ class ViewPresupuestosFragment : Fragment() {
     private fun getData() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val response = RetrofitClient.getClient().create(APIService::class.java).findByUsuario(usuarioDTO)
+                val response = RetrofitClient.getClient().create(APIService::class.java).facturaFindByUsuario(usuarioDTO)
 
                 if (response.isSuccessful) {
-                    val presupuestos = response.body() ?: emptyList()
-                    Log.d("ViewPresupuestosFragment", "Presupuestos loaded: ${presupuestos.size}")
+                    val facturas = response.body() ?: emptyList()
+                    Log.d("ViewFacturasFragment", "Facturas loaded: ${facturas.size}")
 
                     requireActivity().runOnUiThread {
-                        adapter = PresupuestoAdapter(presupuestos,this@ViewPresupuestosFragment)
+                        adapter = FacturaAdapter(facturas,this@FourthFragment)
                         binding.recyclerView.adapter = adapter
                     }
                 } else {
-                    Log.e("ViewPresupuestosFragment", "Failed to load presupuestos: ${response.errorBody()?.string()}")
+                    Log.e("ViewFacturasFragment", "Failed to load facturas: ${response.errorBody()?.string()}")
                     requireActivity().runOnUiThread {
-                        Toast.makeText(activity, "Failed to load presupuestos", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(activity, "Failed to load facturas", Toast.LENGTH_SHORT).show()
                     }
                 }
             } catch (e: Exception) {
-                Log.e("ViewPresupuestosFragment", "Exception loading presupuestos", e)
+                Log.e("ViewFacturasFragment", "Exception loading facturas", e)
                 requireActivity().runOnUiThread {
-                    Toast.makeText(activity, "Error loading presupuestos", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, "Error loading facturas", Toast.LENGTH_SHORT).show()
                 }
             }
         }
     }
 
     private fun initRecyclerView() {
-        adapter = PresupuestoAdapter(emptyList(),this)
+        adapter = FacturaAdapter(emptyList(), this)
         binding.recyclerView.layoutManager = LinearLayoutManager(activity)
         binding.recyclerView.adapter = adapter
     }
 
     private fun initUi() {
-        binding.BackBtn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_viewPresupuestosFragment_to_person,null))
+
     }
 
     override fun onDestroyView() {
@@ -150,7 +146,6 @@ class ViewPresupuestosFragment : Fragment() {
             Toast.makeText(requireContext(), "Permission denied to show notification", Toast.LENGTH_SHORT).show()
         }
     }
-
 
     private fun getOpenFileIntent(context: Context, file: File): Intent {
         val intent = Intent(Intent.ACTION_VIEW)

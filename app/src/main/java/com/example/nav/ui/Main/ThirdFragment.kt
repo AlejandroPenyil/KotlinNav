@@ -1,6 +1,7 @@
 package com.example.nav.ui.Main
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -45,6 +46,8 @@ class ThirdFragment : Fragment() {
             viewModel.setDarkMode(isChecked)
         }
         binding.backStart.setOnClickListener { goStart() }
+
+        binding.help.setOnClickListener { openHelpUrl() }
     }
 
     private fun goStart() {
@@ -70,6 +73,13 @@ class ThirdFragment : Fragment() {
         }
         AppCompatDelegate.setDefaultNightMode(currentMode)
     }
+
+    private fun openHelpUrl() {
+        val url = "https://concrete-binder-4b1.notion.site/Wiki-de-la-aplicaci-n-Terranaturale-52bb58bf15e84261ad2a7efaca3c19e1"
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(intent)
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
